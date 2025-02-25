@@ -2,6 +2,7 @@ package com.internproject.internintelligence_ecommerce.config;
 
 import com.internproject.internintelligence_ecommerce.security.JWTFilter;
 import com.internproject.internintelligence_ecommerce.service.impl.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,13 +24,12 @@ import jakarta.servlet.http.HttpServletResponse;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 	
-	@Autowired
-	private JWTFilter jwtFilter;
+	private final JWTFilter jwtFilter;
 	
-	@Autowired
-	private UserDetailsServiceImpl userDetailsServiceImpl;
+	private final UserDetailsServiceImpl userDetailsServiceImpl;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

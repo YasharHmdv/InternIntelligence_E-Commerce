@@ -30,10 +30,9 @@ import jakarta.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-@SecurityRequirement(name = "E-Commerce Application")
 public class ProductController {
 
-	private ProductService productService;
+	private final ProductService productService;
 
 	@PostMapping("/admin/categories/{categoryId}/product")
 	public ResponseEntity<ProductDTO> addProduct(@Valid @RequestBody Product product, @PathVariable Long categoryId) {

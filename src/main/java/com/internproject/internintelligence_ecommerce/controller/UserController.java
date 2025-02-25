@@ -23,7 +23,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@SecurityRequirement(name = "E-Commerce Application")
 public class UserController {
 
     private final UserService userService;

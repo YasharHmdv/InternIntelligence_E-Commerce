@@ -25,7 +25,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/admin")
-@SecurityRequirement(name = "E-Commerce Application")
 @RequiredArgsConstructor
 public class AddressController {
 	

@@ -26,7 +26,6 @@ import jakarta.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-@SecurityRequirement(name = "E-Commerce Application")
 public class CategoryController {
 
 	private final CategoryService categoryService;

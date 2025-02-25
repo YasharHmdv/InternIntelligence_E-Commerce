@@ -14,6 +14,7 @@ import com.internproject.internintelligence_ecommerce.repository.CartItemReposit
 import com.internproject.internintelligence_ecommerce.repository.CartRepository;
 import com.internproject.internintelligence_ecommerce.repository.ProductRepository;
 import com.internproject.internintelligence_ecommerce.service.CartService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,18 +24,15 @@ import jakarta.transaction.Transactional;
 
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
-	@Autowired
-	private CartRepository cartRepository;
+	private final CartRepository cartRepository;
 
-	@Autowired
-	private ProductRepository productRepository;
+	private final ProductRepository productRepository;
 
-	@Autowired
-	private CartItemRepository cartItemRepository;
+	private final CartItemRepository cartItemRepository;
 
-	@Autowired
 	private ModelMapper modelMapper;
 
 	@Override

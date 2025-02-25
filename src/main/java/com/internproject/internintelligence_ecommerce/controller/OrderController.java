@@ -23,7 +23,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-@SecurityRequirement(name = "E-Commerce Application")
 public class OrderController {
 	
 	public final OrderService orderService;

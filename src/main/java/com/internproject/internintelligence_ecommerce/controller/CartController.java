@@ -22,7 +22,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-@SecurityRequirement(name = "E-Commerce Application")
 public class CartController {
 	
 	private final CartService cartService;

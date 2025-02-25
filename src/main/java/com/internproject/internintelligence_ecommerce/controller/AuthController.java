@@ -26,7 +26,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@SecurityRequirement(name = "E-Commerce Application")
 public class AuthController {
 
 	private final UserService userService;
