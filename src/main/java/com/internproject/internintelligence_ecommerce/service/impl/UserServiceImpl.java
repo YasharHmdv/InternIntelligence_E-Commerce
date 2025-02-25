@@ -1,9 +1,11 @@
-package com.internproject.internintelligence_ecommerce.service;
+package com.internproject.internintelligence_ecommerce.service.impl;
 
 import com.internproject.internintelligence_ecommerce.dto.*;
 import com.internproject.internintelligence_ecommerce.entity.*;
 import com.internproject.internintelligence_ecommerce.repository.AddressRepository;
 import com.internproject.internintelligence_ecommerce.repository.UserRepository;
+import com.internproject.internintelligence_ecommerce.service.CartService;
+import com.internproject.internintelligence_ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
