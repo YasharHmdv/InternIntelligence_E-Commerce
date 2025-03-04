@@ -47,34 +47,42 @@ public class ProductServiceImpl implements ProductService {
 
 	private final FileService fileService;
 
-	private ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 
 	@Value("${project.image}")
 	private String path;
 
 	@Override
-	public ProductDTO addProduct(Long categoryId, Product product) {
+	public ProductDTO addProduct(Long categoryId, ProductDTO productDTO) {
 
 		Category category = categoryRepository.findById(categoryId)
 				.orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
+		Product existingProduct = productRepository.findByProductName(productDTO.getProductName());
 
 		boolean isProductNotPresent = true;
+		if (existingProduct != null) {
+			throw new APIException("Product already exists");
+		}
 
 		List<Product> products = category.getProducts();
 
-		for (int i = 0; i < products.size(); i++) {
-			if (products.get(i).getProductName().equals(product.getProductName())
-					&& products.get(i).getDescription().equals(product.getDescription())) {
+		/*for (int i = 0; i < products.size(); i++) {
+			if (products.get(i).getProductName().equals(productDTO.getProductName())
+					&& products.get(i).getDescription().equals(productDTO.getDescription())) {
 
 				isProductNotPresent = false;
 				break;
 			}
-		}
+		}*/
 
 		if (isProductNotPresent) {
-			product.setImage("default.png");
-
+			Product product = new Product();
+			product.setProductName(productDTO.getProductName());
+			product.setImage(productDTO.getImage());
 			product.setCategory(category);
+			product.setDescription(productDTO.getDescription());
+			product.setPrice(productDTO.getPrice());
+			product.setDiscount(productDTO.getDiscount());
 
 			double specialPrice = product.getPrice() - ((product.getDiscount() * 0.01) * product.getPrice());
 			product.setSpecialPrice(specialPrice);

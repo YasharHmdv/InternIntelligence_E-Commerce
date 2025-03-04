@@ -34,10 +34,10 @@ public class ProductController {
 
 	private final ProductService productService;
 
-	@PostMapping("/admin/categories/{categoryId}/product")
-	public ResponseEntity<ProductDTO> addProduct(@Valid @RequestBody Product product, @PathVariable Long categoryId) {
+	@PostMapping("/admin/category/{categoryId}/product")
+	public ResponseEntity<ProductDTO> addProduct(@Valid @RequestBody ProductDTO productDTO, @PathVariable Long categoryId) {
 
-		ProductDTO savedProduct = productService.addProduct(categoryId, product);
+		ProductDTO savedProduct = productService.addProduct(categoryId, productDTO);
 
 		return new ResponseEntity<ProductDTO>(savedProduct, HttpStatus.CREATED);
 	}
