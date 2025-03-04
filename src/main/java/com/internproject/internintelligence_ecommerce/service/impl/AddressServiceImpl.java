@@ -74,35 +74,39 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public AddressDTO updateAddress(Long addressId, Address address) {
-		Address addressFromDB = addressRepository.findByCountryAndStateAndCityAndPincodeAndStreetAndBuildingName(
-				address.getCountry(), address.getState(), address.getCity(), address.getPincode(), address.getStreet(),
-				address.getBuildingName());
+	public AddressDTO updateAddress(Long addressId, AddressDTO addressDTO) {
+		Address address = modelMapper.map(addressDTO,Address.class);
 
-		if (addressFromDB == null) {
-			addressFromDB = addressRepository.findById(addressId)
-					.orElseThrow(() -> new ResourceNotFoundException("Address", "addressId", addressId));
+			Address addressFromDB = addressRepository.findByCountryAndStateAndCityAndPincodeAndStreetAndBuildingName(
+					address.getCountry(), address.getState(), address.getCity(), address.getPincode(),
+					address.getStreet(),
+					address.getBuildingName());
 
-			addressFromDB.setCountry(address.getCountry());
-			addressFromDB.setState(address.getState());
-			addressFromDB.setCity(address.getCity());
-			addressFromDB.setPincode(address.getPincode());
-			addressFromDB.setStreet(address.getStreet());
-			addressFromDB.setBuildingName(address.getBuildingName());
+			if (addressFromDB == null) {
+				addressFromDB = addressRepository.findById(addressId)
+						.orElseThrow(() -> new ResourceNotFoundException("Address", "addressId", addressId));
 
-			Address updatedAddress = addressRepository.save(addressFromDB);
+				addressFromDB.setCountry(address.getCountry());
+				addressFromDB.setState(address.getState());
+				addressFromDB.setCity(address.getCity());
+				addressFromDB.setPincode(address.getPincode());
+				addressFromDB.setStreet(address.getStreet());
+				addressFromDB.setBuildingName(address.getBuildingName());
 
-			return modelMapper.map(updatedAddress, AddressDTO.class);
-		} else {
-			List<User> users = userRepository.findByAddress(addressId);
-			final Address a = addressFromDB;
+				Address updatedAddress = addressRepository.save(addressFromDB);
 
-			users.forEach(user -> user.getAddresses().add(a));
+				return modelMapper.map(updatedAddress, AddressDTO.class);
 
-			deleteAddress(addressId);
+			} else {
+				List<User> users = userRepository.findByAddress(addressId);
+				final Address a = addressFromDB;
 
-			return modelMapper.map(addressFromDB, AddressDTO.class);
-		}
+				users.forEach(user -> user.getAddresses().add(a));
+
+				deleteAddress(addressId);
+
+				return modelMapper.map(addressFromDB, AddressDTO.class);
+			}
 	}
 
 	@Override

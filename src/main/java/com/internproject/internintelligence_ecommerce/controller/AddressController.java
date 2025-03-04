@@ -24,41 +24,41 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/address")
 @RequiredArgsConstructor
 public class AddressController {
 	
 	private final AddressService addressService;
 	
-	@PostMapping("/address")
+	@PostMapping("/create")
 	public ResponseEntity<AddressDTO> createAddress(@Valid @RequestBody AddressDTO addressDTO) {
 		AddressDTO savedAddressDTO = addressService.createAddress(addressDTO);
 		
 		return new ResponseEntity<AddressDTO>(savedAddressDTO, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/addresses")
+	@GetMapping("/get-all")
 	public ResponseEntity<List<AddressDTO>> getAddresses() {
 		List<AddressDTO> addressDTOs = addressService.getAddresses();
 		
 		return new ResponseEntity<List<AddressDTO>>(addressDTOs, HttpStatus.FOUND);
 	}
 	
-	@GetMapping("/addresses/{addressId}")
+	@GetMapping("/{addressId}")
 	public ResponseEntity<AddressDTO> getAddress(@PathVariable Long addressId) {
 		AddressDTO addressDTO = addressService.getAddress(addressId);
 		
 		return new ResponseEntity<AddressDTO>(addressDTO, HttpStatus.FOUND);
 	}
 	
-	@PutMapping("/addresses/{addressId}")
-	public ResponseEntity<AddressDTO> updateAddress(@PathVariable Long addressId, @RequestBody Address address) {
-		AddressDTO addressDTO = addressService.updateAddress(addressId, address);
+	@PutMapping("/update/{addressId}")
+	public ResponseEntity<AddressDTO> updateAddress(@PathVariable Long addressId, @RequestBody AddressDTO addressDTO) {
+		addressService.updateAddress(addressId, addressDTO);
 		
 		return new ResponseEntity<AddressDTO>(addressDTO, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/addresses/{addressId}")
+	@DeleteMapping("/delete/{addressId}")
 	public ResponseEntity<String> deleteAddress(@PathVariable Long addressId) {
 		String status = addressService.deleteAddress(addressId);
 		
