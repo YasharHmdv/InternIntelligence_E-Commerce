@@ -1,5 +1,6 @@
 package com.internproject.internintelligence_ecommerce.security;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -19,10 +20,14 @@ public class JWTUtil {
 	private String secret;
 
 	public String generateToken(String email) throws IllegalArgumentException, JWTCreationException {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.HOUR,1);
 		return JWT.create()
 				.withSubject("User Details")
 				.withClaim("email", email)
 				.withIssuedAt(new Date())
+				.withIssuedAt(new Date())
+				.withExpiresAt(calendar.getTime())
 				.withIssuer("Event Scheduler")
 				.sign(Algorithm.HMAC256(secret));
 	}

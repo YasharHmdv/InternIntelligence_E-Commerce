@@ -45,16 +45,26 @@ public class UserServiceImpl implements UserService {
 
 	private final CartService cartService;
 	@Override
+	@Transactional
 	public UserDTO registerUser(UserDTO userDTO) {
 
+		if (userRepository.existsByEmail(userDTO.getEmail())) {
+			throw new APIException("User already exists with emailId: " + userDTO.getEmail());
+		}
 		try {
+			String encodedPass = passwordEncoder.encode(userDTO.getPassword());
+			userDTO.setPassword(encodedPass);
+
 			User user = modelMapper.map(userDTO, User.class);
 
 			Cart cart = new Cart();
 			user.setCart(cart);
 
-			Role role = roleRepository.findById(AppConstants.USER_ID).get();
-			user.getRoles().add(role);
+			Role role = roleRepository.findById(AppConstants.USER_ID).orElseThrow(()->
+			new RuntimeException("Role not found"));
+			if (!user.getRoles().contains(role)) {
+				user.getRoles().add(role);
+			}
 
 			String country = userDTO.getAddress().getCountry();
 			String state = userDTO.getAddress().getState();
@@ -68,7 +78,6 @@ public class UserServiceImpl implements UserService {
 
 			if (address == null) {
 				address = new Address(country, state, city, pincode, street, buildingName);
-
 				address = addressRepository.save(address);
 			}
 
@@ -84,7 +93,8 @@ public class UserServiceImpl implements UserService {
 
 			return userDTO;
 		} catch (DataIntegrityViolationException e) {
-			throw new APIException("User already exists with emailId: " + userDTO.getEmail());
+			throw new APIException("Error during user registration: " + e.getMessage());
+
 		}
 
 	}
