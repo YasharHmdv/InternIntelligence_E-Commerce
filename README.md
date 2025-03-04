@@ -7,7 +7,7 @@ This is an E-commerce application built using the Spring Framework, Spring Secur
 
 ## Features
 
-User Authentication & Authorization: Managed via Spring Security (Role-based access control).
+User Authentication & Authorization: Managed via Spring Security (Role-based access control).<br/>
 Product Management: Users can view products and add them to their cart.
 Cart & CartItem: Users can add, remove, and view items in their shopping cart.
 Order & OrderItem: Users can place orders containing multiple products.
@@ -37,7 +37,7 @@ JPA (Java Persistence API): To interact with the database using entities.
 ModelMapper: For mapping between entity objects and DTOs (Data Transfer Objects).
 Lombok: For reducing boilerplate code like getters, setters, and constructors.
 
-Java 17
-MySQL Database
-Maven (for managing dependencies)
-Postman or any API testing tool
+Java 17 <br/>
+MySQL Database <br/>
+Maven (for managing dependencies) <br/>
+Postman or any API testing tool <br/>
