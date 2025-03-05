@@ -39,7 +39,7 @@ Lombok: For reducing boilerplate code like getters, setters, and constructors.
 
 Java 17 <br/>
 MySQL Database <br/>
-Maven (for managing dependencies) <br/>
+Gradle <br/>
 Postman or any API testing tool <br/>
 
 # **Setup & Installation**
@@ -59,7 +59,7 @@ Postman or any API testing tool <br/>
 yaml file: <br/>
 spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce_db<br/>
 spring.datasource.username=root<br/>
-spring.datasource.password=yourpassword<br/>
+spring.datasource.password=password<br/>
 spring.jpa.hibernate.ddl-auto=update<br/>
 spring.jpa.show-sql=true<br/>
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver<br/>
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver<br/>   
