@@ -17,6 +17,7 @@ import com.internproject.internintelligence_ecommerce.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -213,6 +214,15 @@ public class CartServiceImpl implements CartService {
 		cartItemRepository.deleteCartItemByProductIdAndCartId(cartId, productId);
 
 		return "Product " + cartItem.getProduct().getProductName() + " removed from the cart !!!";
+	}
+
+	@Override
+	public ResponseEntity<CartDTO> createCart(CartDTO cartDTO) {
+		Cart cart = new Cart();
+		cart.setCartItems(cart.getCartItems());
+		cart.setTotalPrice(cart.getTotalPrice());
+		cartRepository.save(cart);
+		return ResponseEntity.ok(cartDTO);
 	}
 
 }

@@ -126,9 +126,6 @@ public class UserServiceImpl implements UserService {
 			List<ProductDTO> products = user.getCart().getCartItems().stream()
 					.map(item -> modelMapper.map(item.getProduct(), ProductDTO.class)).collect(Collectors.toList());
 
-			dto.setCart(cart);
-
-			dto.getCart().setProducts(products);
 
 			return dto;
 
@@ -160,9 +157,6 @@ public class UserServiceImpl implements UserService {
 		List<ProductDTO> products = user.getCart().getCartItems().stream()
 				.map(item -> modelMapper.map(item.getProduct(), ProductDTO.class)).collect(Collectors.toList());
 
-		userDTO.setCart(cart);
-
-		userDTO.getCart().setProducts(products);
 
 		return userDTO;
 	}
@@ -208,10 +202,6 @@ public class UserServiceImpl implements UserService {
 
 		List<ProductDTO> products = user.getCart().getCartItems().stream()
 				.map(item -> modelMapper.map(item.getProduct(), ProductDTO.class)).collect(Collectors.toList());
-
-		userDTO.setCart(cart);
-
-		userDTO.getCart().setProducts(products);
 
 		return userDTO;
 	}
